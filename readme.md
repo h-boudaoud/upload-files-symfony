@@ -36,6 +36,34 @@ run-server.sh
  composer require maker twig validator annotations orm form && composer require profiler --dev
 
 ```
+#### Add Form UploadFilesType
+ Add class UploadArrayFiles and Build the form UploadFilesType
+```
+php bin/console make:form UploadFilesType UploadArrayFiles
+
+```
+ Change the field types reference and/or add fields properties  to the form
+ 
+ #### Add controller UploadFiles
+  Add class UploadArrayFiles and Build the form UploadFilesType
+ ```
+ php bin/console make:controller UploadFiles
+ 
+ ```
+  Alter the controller and the template to upload the files to the database or to a folder
+
+ 
+
+ ![alt text](https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/OOjs_UI_icon_alert_destructive_black-darkred.svg/44px-OOjs_UI_icon_alert_destructive_black-darkred.svg.png "Warning")
+ Any type of file can be downloaded
+ 
+  
+ ```
+
+ ```
+  
+
+
 
 ## Author
 h.boudaoud

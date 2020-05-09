@@ -1,0 +1,146 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UploadFilesController!{% endblock %}
+
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block body %}
+    <style>
+
+    </style>
+
+    <div class="jumbotron">
+        <h1> Upload files</h1>
+        {{ form_start(form) }}
+        <div class="my-custom-class-for-errors">
+            {{ form_errors(form) }}
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <i class="fa fa-upload"></i> {{ form_label(form.files) }}
+                    <div class="col-sm-9  file-upload-wrapper">
+                        {{ form_widget(form.files) }}
+                        <br/><small>{{ form_help(form.files) }}</small>
+                        <div id="listNewFiles"></div>
+                        <div class="form-error">
+                            {{ form_errors(form.files) }}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6" id="saveTo">
+                {{ form_label(form.saveTo) }} <i class="fa fa-folder"></i>
+                {{ form_widget(form.saveTo) }}
+
+                <small>{{ form_help(form.saveTo) }}</small>
+
+                <div class="form-error">
+                    {{ form_errors(form.saveTo) }}
+                </div>
+            </div>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-dark">Upload files</button>
+        </div>
+
+        {{ form_end(form) }}
+    </div>
+    {% if listUrlFiles|length > 0 %}
+        <div class="container">
+            {% for file in listUrlFiles %}
+                <div>
+                    {% if file.mimeType |split('/')|filter(v => v == 'image') %}
+                        {% if file.saveTo =='database' %}
+                            <object class="databasefile" type="{{ file.mimeType }}" style="max-height: 20vh;"
+                                    data="data:{{ file.mimeType }};base64,{{ file.data }}">
+                                The “object” tag is not supported by your browser.
+                            </object>
+                        {% else %}
+                            <img src="/{{ file.data }}" style="width: 40%; height: auto"/>
+                        {% endif %}
+                    {% else %}
+                        {% if file.saveTo =='database' %}
+                            {{ file.name}} in base64
+                            <pre>
+                                <cod>
+                                    {{ file.data }}
+                                </cod>
+                            </pre>
+                        {% else %}
+                            Link to :
+                            <a href="/{{ file.data}}" >{{ file.name}}</a>
+                        {% endif %}
+                    {% endif %}
+                </div>
+
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}
+
+
+    {% block javascripts %}
+        <script>
+
+            var image = $('.databasefile')
+            image.each(function() {
+                console.log($(this).offsetWidth)
+                console.log($(this).offsetHeight)
+            })
+
+            $('#upload_files_files').change(function (event) {
+                var names = $.map($(this).prop("files"), function (val) {
+                    return val.name;
+                })
+
+                $('#listNewFiles').html('')
+                names.forEach(function (name) {
+                    $('#listNewFiles').append('<br />' + name)
+                })
+
+                $('#listNewFiles').append('<br />' +
+                    '<button class="alert alert-danger" type="button" onclick="clearListUploads()">' +
+                    '<i class="fa fa-trash"></i>' +
+                    '</button>'
+                )
+
+                console.log('names', names,
+                    'upload_files_files :', $(this).prop("files"),
+                    '\n#upload_files_files.val()', $('#upload_files_files').val()
+                )
+
+                $('#listNewFiles').append('<p></p>')
+
+            })
+
+
+            $('#upload_files_saveTo').change(function (event) {
+                const addClass = "fa-" + ($(this).val() != "database" ? "folder" : "database")
+                const removeClass = "fa-" + ($(this).val() != "folder" ? "folder" : "database")
+
+                console.log('new  class :', addClass)
+                $('#saveTo').children('i').removeClass(removeClass).addClass(addClass)
+
+                console.log('this.text :', $(this).val(),
+                    '\n## i.html', $('#saveTo').children('i')
+                )
+            })
+
+            function clearListUploads() {
+                console.log('clearListUploads')
+                $('#upload_files_files').val('')
+                $('#listNewFiles').html('')
+
+                if (!/safari/i.test(navigator.userAgent)) {
+                    $('#upload_files_files').attr('type', '')
+                    $('#upload_files_files').attr('type', 'file')
+                }
+            }
+        </script>
+    {% endblock %}
