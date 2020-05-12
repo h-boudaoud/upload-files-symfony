@@ -2,9 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\UploadArrayFiles;
 use App\Form\UploadFilesType;
-use Safe\Exceptions\AbstractSafeException;
+use App\Service\UploadArrayFiles;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,17 +14,21 @@ class UploadFilesController extends AbstractController
     /**
      * @Route("/upload/", name="upload")
      * @param Request $request
+     * @param UploadArrayFiles $uploadArrayFiles
      * @return Response
      */
-    public function index(Request $request)
+    public function index(Request $request, UploadArrayFiles $uploadArrayFiles)
     {
         $listUrlFiles = null;
-        $newFiles = new UploadArrayFiles();
-        $form = $this->createForm(UploadFilesType::class, $newFiles);
+        $form = $this->createForm(UploadFilesType::class, $uploadArrayFiles);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            dump(['request'=>$request,
+                'submitted'=>$form->isSubmitted(),
+                'valid'=>$form->isValid(),
+                'data'=>$form->getData()]);
 
-            foreach ($newFiles->getFiles() as $file) {
+            foreach ($uploadArrayFiles->getFiles() as $file) {
                 $mimetype = $file->getMimeType() == "image/svg"?"image/svg+xml" : $file->getMimeType();
                 $urlFile = [
                     'name'=>$file->getClientOriginalName(),
@@ -33,11 +36,11 @@ class UploadFilesController extends AbstractController
                     'mimeType' => $mimetype
                 ];
                 try {
-                    if ($newFiles->getSaveTo() === 'folder') {
+                    if ($uploadArrayFiles->getSaveTo() === 'folder') {
                         $folder = $file->getClientOriginalName();
                         $file->move('asset/Uploads/', $folder);
                         $urlFile["data"] = 'asset/Uploads/' . $folder;
-                    } else if ($newFiles->getSaveTo() == 'database') {
+                    } else if ($uploadArrayFiles->getSaveTo() == 'database') {
                         $urlFile["data"] =base64_encode(\file_get_contents($file));
                         $urlFile['saveTo'] = 'database';
                     }

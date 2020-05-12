@@ -2,7 +2,8 @@
 
 namespace App\Form;
 
-use App\Entity\UploadArrayFiles;
+
+use App\Service\UploadArrayFiles;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -11,6 +12,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class UploadFilesType extends AbstractType
 {
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder

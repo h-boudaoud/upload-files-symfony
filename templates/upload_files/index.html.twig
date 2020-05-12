@@ -14,7 +14,7 @@
     <div class="jumbotron">
         <h1> Upload files</h1>
         {{ form_start(form) }}
-        <div class="my-custom-class-for-errors">
+        <div class="my-custom-class-for-errors {%  if form_errors(form) %}alert alert-danger {% endif %}">
             {{ form_errors(form) }}
         </div>
 
@@ -55,28 +55,42 @@
         <div class="container">
             {% for file in listUrlFiles %}
                 <div>
-                    {% if file.mimeType |split('/')|filter(v => v == 'image') %}
-                        {% if file.saveTo =='database' %}
-                            <object class="databasefile" type="{{ file.mimeType }}" style="max-height: 20vh;"
-                                    data="data:{{ file.mimeType }};base64,{{ file.data }}">
-                                The “object” tag is not supported by your browser.
-                            </object>
-                        {% else %}
-                            <img src="/{{ file.data }}" style="width: 40%; height: auto"/>
-                        {% endif %}
-                    {% else %}
-                        {% if file.saveTo =='database' %}
-                            {{ file.name}} in base64
+
+                    {% if file.saveTo =='database' %}
+                        <object class="databasefile" type="{{ file.mimeType }}" style="max-height: 20vh;"
+                                data="data:{{ file.mimeType }};base64,{{ file.data }}">
+                            The “object” tag is not supported by your browser.
+                            <br /><a href="{{ asset(file.data) }}">{{ file.name }}</a>
                             <pre>
                                 <cod>
                                     {{ file.data }}
                                 </cod>
                             </pre>
+                        </object>
+                    {% else %}
+
+                        {% if 'image' in file.mimeType %}
+                            {#                        {% if file.mimeType |split('/')|filter(v => isset(strpos(v, 'image') %}#}
+
+                            |image :
+                            <img src="{{ asset(file.data) }}" style="height: 20vh; width: auto"/>
+
                         {% else %}
-                            Link to :
-                            <a href="/{{ file.data}}" >{{ file.name}}</a>
+
+                            {% if 'pdf' in file.mimeType %}
+                                pdf
+                                <object class="flooder" type="{{ file.mimeType }}" style="max-height: 20vh;width: auto"
+                                        data="{{ asset(file.data) }}">
+                                    The “object” tag is not supported by your browser.
+                                    <br /><a href="{{ asset(file.data) }}">{{ file.name }}</a>
+                                </object>
+                            {% else %}
+                                file
+                                <a href="{{ asset(file.data) }}">{{ file.name }}</a>
+                            {% endif %}
                         {% endif %}
                     {% endif %}
+
                 </div>
 
             {% endfor %}
@@ -89,7 +103,7 @@
         <script>
 
             var image = $('.databasefile')
-            image.each(function() {
+            image.each(function () {
                 console.log($(this).offsetWidth)
                 console.log($(this).offsetHeight)
             })
