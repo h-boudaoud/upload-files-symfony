@@ -2,19 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f8bb603f-5363-4548-9211-900ae20d6724" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/upload-files-symfony.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/upload-files-symfony.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/UploadFilesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UploadFilesController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/UploadArrayFiles.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/UploadArrayFiles.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/UploadFilesType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/UploadFilesType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/upload_files/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/upload_files/index.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,6 +130,7 @@
       <workItem from="1588997336181" duration="32267000" />
       <workItem from="1589230487490" duration="3840000" />
       <workItem from="1589296642037" duration="7987000" />
+      <workItem from="1589326494722" duration="594000" />
     </task>
     <servers />
   </component>
@@ -150,9 +142,9 @@
       <screen x="0" y="0" width="1360" height="728" />
     </state>
     <state x="410" y="118" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1360.728@0.0.1360.728" timestamp="1588998604134" />
-    <state x="375" y="187" key="com.intellij.ide.util.TipDialog" timestamp="1589296641744">
+    <state x="375" y="187" key="com.intellij.ide.util.TipDialog" timestamp="1589326495921">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state x="375" y="187" key="com.intellij.ide.util.TipDialog/0.0.1360.728@0.0.1360.728" timestamp="1589296641744" />
+    <state x="375" y="187" key="com.intellij.ide.util.TipDialog/0.0.1360.728@0.0.1360.728" timestamp="1589326495921" />
   </component>
 </project>
