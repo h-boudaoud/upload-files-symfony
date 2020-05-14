@@ -57,11 +57,34 @@ php bin/console make:form UploadFilesType UploadArrayFiles
  ![alt text](https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/OOjs_UI_icon_alert_destructive_black-darkred.svg/44px-OOjs_UI_icon_alert_destructive_black-darkred.svg.png "Warning")
  Any type of file can be downloaded
  
+  #### Add Entities, controllers, forms
   
  ```
+#Entity Product, Image,  Category ...
+php bin/console make:entity Product
+
+#Controller ProductController, ImageConroller, ...
+php bin/console make:controller Product
+
+#form ProductType (form for Product entity), .... 
+php bin/console make:form Product Product
 
  ```
-  
+Alter Entities, controllers, forms and templates
+
+#### Configuring the Database
+customize environment variable called DATABASE_URL inside .env
+ ```
+# create Database
+php bin/console doctrine:database:create
+
+# Migrations
+php bin/console make:migration
+php bin/console doctrine:migrations:migrate
+
+ ```
+ 
+ 
 
 
 

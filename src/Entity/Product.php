@@ -9,6 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
+use Picqer\Barcode;
+
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)
  * @UniqueEntity(fields="reference", message="This reference is already used.")
@@ -46,7 +48,7 @@ class Product
     private $description;
 
     /**
-     * @ORM\Column(type="decimal", precision=4, scale=2)
+     * @ORM\Column(type="decimal", precision=6, scale=2)
      */
     private $price;
 
@@ -87,7 +89,7 @@ class Product
     private $category;
 
     /**
-     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="product")
+     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="product" , cascade = {"persist"})
      */
     private $images;
 
@@ -121,6 +123,15 @@ class Product
 
     public function setName(string $name): self
     {
+        if($name){
+            if($this->createdAt){
+                $this->updatedAt = new \DateTime();
+            }
+            else{
+                $this->createdAt = new \DateTime();
+            }
+            $this->reference = 1001001010001;
+        }
         $this->name = $name;
 
         return $this;
@@ -216,8 +227,10 @@ class Product
         return $this->images;
     }
 
+
     public function addImage(Image $image): self
     {
+
         if (!$this->images->contains($image)) {
             $this->images[] = $image;
             $image->setProduct($this);
@@ -225,6 +238,7 @@ class Product
 
         return $this;
     }
+
 
     public function removeImage(Image $image): self
     {

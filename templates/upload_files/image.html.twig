@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'Layout.html.twig' %}
 
 {% block title %}Hello UploadFilesController!{% endblock %}
 
@@ -52,7 +52,7 @@
         {{ form_end(form) }}
     </div>
     {% if image %}
-    <div class="container">
+    <div class="container reg">
         created : {{ image.createdAt | date('Y-m-d') }} at {{ image.createdAt | date('H:i:s') }}
         Name : {{ image.imageName }}
         Client original name : {{ image.clientOriginalName }}

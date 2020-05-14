@@ -1,20 +1,112 @@
-{% extends 'base.html.twig' %}
+{% extends 'base.nav.left.html.twig' %}
 
-{% block title %}Hello ProductController!{% endblock %}
+{#      the view title      #}
+{% block title controller_name %}
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'F:/www/PHP/Symfony/upload-files-symfony/src/Controller/ProductController.php'|file_link(0) }}">src/Controller/ProductController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'F:/www/PHP/Symfony/upload-files-symfony/templates/product/index.html.twig'|file_link(0) }}">templates/product/index.html.twig</a></code></li>
-    </ul>
-</div>
+{#      The view style sheet    #}
+{% block stylesheets %}
+    article br{
+    margin-top:1rem;
+    }
 {% endblock %}
+
+
+{#      the title h1 of the view   #}
+{% block h1 "Hello "~ controller_name %}
+
+
+{#      Block body of the view   #}
+{% block navigationLeft %}
+    <nav class="sticky-top navbar navbar-dark">
+        <ul>
+            <li>
+                <a href="" class="btn">
+                    <i class="fa fa-edit"></i> Edit
+                </a>
+            </li>
+            <li>
+                <a href="" class="btn">
+                    <i class="fa fa-trash"></i> Delete
+                </a>
+            </li>
+            <li>
+                <a href="" class="btn">
+                   <i class="fa fa-plus-square" aria-hidden="true"></i> New
+                </a>
+            </li>
+            <li>
+                <a href="" class="btn">
+                    <i class="fa fa-comment"></i> New comment
+                </a>
+            </li>
+        </ul>
+    </nav>
+{% endblock %}
+
+{% block content %}
+{#    Page Category  {{ id }}#}
+{#    <br/>{% if category.name %}{{ category.name }} {% endif %}#}
+{#    <hr/>#}
+{#    <div class="row">#}
+{#        <div class="col-lg-6">#}
+{#            <img class="card-img-top w-100"#}
+{#                 src="https://i.picsum.photos/id/{{ article.id }}/500/300.jpg"#}
+{#                 alt="{{ article.name |capitalize }}">#}
+{#        </div>#}
+{#        <div class="col-lg-6">#}
+{#            <p>#}
+{#                {{ article.id }} : {{ article.name }}#}
+{#            </p>#}
+{#            <p>#}
+{#                {{ article.createdAt |date("m/d/Y") }}#}
+{#            </p>#}
+{#        </div>#}
+{#    </div>#}
+{#    <div>#}
+{#        <p class="article">#}
+{#            {{ article.description |nl2br }}#}
+{#        </p>#}
+{#    </div>#}
+{#    <div>#}
+{#        {% for comment in article.notifications %}#}
+{#            <div class="my-3 px-3 bg-light comment">#}
+{#                <h3>#}
+{#                    {{ comment.id }} : {{ comment.article.name }}#}
+{#                </h3>#}
+{#                <p>#}
+{#                    {{ comment.content |nl2br }}#}
+{#                </p>#}
+{#                <div>#}
+{#                    {{ comment.createdAt |date('d/m/Y') }} at {{ comment.createdAt |date('h:m:s') }}#}
+
+{#                    <div class="d-inline-block float-right">#}
+
+{#                        {% if comment.starRating %}#}
+{#                            <span class="starRating px-3 badge badge-secondary">#}
+{#                                {{ comment.starRating }}#}
+{#                            </span>#}
+{#                        {% else %}#}
+{#                            <i class="far fa-star px-3 badge badge-secondary"#}
+{#                               style="text-decoration: line-through;"> </i>#}
+
+{#                        {% endif %}#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        {% endfor %}#}
+{#    </div>#}
+
+    Products
+
+{% endblock %}
+{#      End block body of the view   #}
+
+
+
+{#      The view JavaScript    #}
+{#<script>#}
+{% block javascripts %}
+
+{% endblock %}
+{#</script>#}
+

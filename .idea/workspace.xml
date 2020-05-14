@@ -3,7 +3,19 @@
   <component name="ChangeListManager">
     <list default="true" id="f8bb603f-5363-4548-9211-900ae20d6724" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/twig.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/twig.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProductController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/UploadFilesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UploadFilesController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Image.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Image.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Product.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200513154714.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Layout.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/product/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/product/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/upload_files/image.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/upload_files/image.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/upload_files/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/upload_files/index.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,6 +27,14 @@
     <execution>
       <executable />
     </execution>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -105,13 +125,18 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/Service" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates/product" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
+    <key name="MoveFile.RECENT_KEYS">
       <recent name="F:\www\PHP\Symfony\upload-files-symfony\src\Service" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\www\PHP\Symfony\upload-files-symfony\templates\product" />
+      <recent name="F:\www\PHP\Symfony\upload-files-symfony\templates" />
+      <recent name="F:\www\PHP\Symfony\upload-files-symfony\public\asset\css" />
+      <recent name="F:\www\PHP\Symfony\upload-files-symfony\public\asset\font\Tippa" />
       <recent name="F:\www\PHP\Symfony\upload-files-symfony\src\Service" />
     </key>
   </component>
@@ -129,7 +154,8 @@
       <workItem from="1589230487490" duration="3840000" />
       <workItem from="1589296642037" duration="7987000" />
       <workItem from="1589326494722" duration="1450000" />
-      <workItem from="1589382295284" duration="2802000" />
+      <workItem from="1589382295284" duration="3772000" />
+      <workItem from="1589408583964" duration="28235000" />
     </task>
     <servers />
   </component>
@@ -137,13 +163,21 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="410" y="118" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1588998604134">
+    <state x="0" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1589438055334">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state x="410" y="118" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1360.728@0.0.1360.728" timestamp="1588998604134" />
-    <state x="375" y="187" key="com.intellij.ide.util.TipDialog" timestamp="1589382297276">
+    <state x="0" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1360.728@0.0.1360.728" timestamp="1589438055334" />
+    <state x="410" y="118" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1589431883980">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state x="375" y="187" key="com.intellij.ide.util.TipDialog/0.0.1360.728@0.0.1360.728" timestamp="1589382297276" />
+    <state x="410" y="118" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1360.728@0.0.1360.728" timestamp="1589431883980" />
+    <state x="439" y="178" key="NewPhpClassDialog" timestamp="1589419854035">
+      <screen x="0" y="0" width="1360" height="728" />
+    </state>
+    <state x="439" y="178" key="NewPhpClassDialog/0.0.1360.728@0.0.1360.728" timestamp="1589419854035" />
+    <state x="375" y="187" key="com.intellij.ide.util.TipDialog" timestamp="1589408584097">
+      <screen x="0" y="0" width="1360" height="728" />
+    </state>
+    <state x="375" y="187" key="com.intellij.ide.util.TipDialog/0.0.1360.728@0.0.1360.728" timestamp="1589408584097" />
   </component>
 </project>

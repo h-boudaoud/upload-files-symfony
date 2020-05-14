@@ -82,7 +82,7 @@ class Image
     private $image;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Product::class, inversedBy="images")
+     * @ORM\ManyToOne(targetEntity=Product::class, inversedBy="images" , cascade = {"persist"})
      */
     private $product;
 

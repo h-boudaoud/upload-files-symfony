@@ -104,7 +104,7 @@ class UploadFilesController extends AbstractController
             // dump(['$listUrlFiles' => $listUrlFiles]);
 
         }
-        return $this->render('upload_files/index.html.twig', [
+        return $this->render('upload_files/base.html.twig', [
             'controller_name' => 'UploadFilesController',
             'form' => $form->createView(),
             'listUrlFiles' => $listUrlFiles,
