@@ -2,17 +2,41 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f8bb603f-5363-4548-9211-900ae20d6724" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/asset/img/no-image-available-icon.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/asset/img/no-image-available.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Controller/CategoryController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/category/index.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/product/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/upload-files-symfony.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/upload-files-symfony.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vs/ProjectSettings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vs/slnx.sqlite" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/packages/twig.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/twig.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/asset/css/indexStylesheet.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/asset/css/indexStylesheet.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/asset/js/indexScript.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/asset/js/indexScript.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProductController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/UploadFilesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UploadFilesController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Category.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Category.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Image.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Image.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Product.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200513154714.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/ImageType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/ImageType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/ProductType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/ProductType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/UploadFilesType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/UploadFilesType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/PrincipalCategories.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/PrincipalCategories.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Layout.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/Layout.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Layout.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/product/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/product/edit.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/product/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/product/index.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/upload_files/image.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/upload_files/image.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/upload_files/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/upload_files/index.html.twig" afterDir="false" />
@@ -28,11 +52,26 @@
       <executable />
     </execution>
   </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CSS File" />
         <option value="JavaScript File" />
+        <option value="XHTML File" />
       </list>
     </option>
   </component>
@@ -112,6 +151,9 @@
       <path value="$PROJECT_DIR$/vendor/doctrine/persistence" />
       <path value="$PROJECT_DIR$/vendor/doctrine/orm" />
       <path value="$PROJECT_DIR$/vendor/symfony/asset" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/data-fixtures" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/doctrine-fixtures-bundle" />
+      <path value="$PROJECT_DIR$/vendor/fzaninotto/faker" />
     </include_path>
   </component>
   <component name="ProjectId" id="1befA7KR2KE8UOIt8TgiTd0WdmZ" />
@@ -122,11 +164,14 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="DefaultHtmlFileTemplate" value="XHTML File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/templates/product" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -155,7 +200,11 @@
       <workItem from="1589296642037" duration="7987000" />
       <workItem from="1589326494722" duration="1450000" />
       <workItem from="1589382295284" duration="3772000" />
-      <workItem from="1589408583964" duration="28235000" />
+      <workItem from="1589408583964" duration="59744000" />
+      <workItem from="1589550523624" duration="11802000" />
+      <workItem from="1589676582244" duration="17259000" />
+      <workItem from="1589825293437" duration="34639000" />
+      <workItem from="1589985851347" duration="39156000" />
     </task>
     <servers />
   </component>
@@ -163,21 +212,41 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="272" y="22" key="#Intentions" timestamp="1589857140252">
+      <screen x="0" y="0" width="1360" height="728" />
+    </state>
+    <state x="272" y="22" key="#Intentions/0.0.1360.728@0.0.1360.728" timestamp="1589857140252" />
+    <state x="272" y="22" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1590010991715">
+      <screen x="0" y="0" width="1360" height="728" />
+    </state>
+    <state x="272" y="22" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1360.728@0.0.1360.728" timestamp="1590010991715" />
+    <state x="473" y="79" key="#com.intellij.ide.util.MemberChooser" timestamp="1590017845200">
+      <screen x="0" y="0" width="1360" height="728" />
+    </state>
+    <state x="473" y="79" key="#com.intellij.ide.util.MemberChooser/0.0.1360.728@0.0.1360.728" timestamp="1590017845200" />
     <state x="0" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1589438055334">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
     <state x="0" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1360.728@0.0.1360.728" timestamp="1589438055334" />
-    <state x="410" y="118" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1589431883980">
+    <state x="410" y="118" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1589942471543">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state x="410" y="118" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1360.728@0.0.1360.728" timestamp="1589431883980" />
+    <state x="410" y="118" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1360.728@0.0.1360.728" timestamp="1589942471543" />
+    <state x="549" y="214" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1589988058252">
+      <screen x="0" y="0" width="1360" height="728" />
+    </state>
+    <state x="549" y="214" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1360.728@0.0.1360.728" timestamp="1589988058252" />
+    <state width="196" height="457" key="HiddenNamespacesPopup" timestamp="1590010976172">
+      <screen x="0" y="0" width="1360" height="728" />
+    </state>
+    <state width="196" height="457" key="HiddenNamespacesPopup/0.0.1360.728@0.0.1360.728" timestamp="1590010976172" />
     <state x="439" y="178" key="NewPhpClassDialog" timestamp="1589419854035">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
     <state x="439" y="178" key="NewPhpClassDialog/0.0.1360.728@0.0.1360.728" timestamp="1589419854035" />
-    <state x="375" y="187" key="com.intellij.ide.util.TipDialog" timestamp="1589408584097">
+    <state x="375" y="187" key="com.intellij.ide.util.TipDialog" timestamp="1589985851307">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state x="375" y="187" key="com.intellij.ide.util.TipDialog/0.0.1360.728@0.0.1360.728" timestamp="1589408584097" />
+    <state x="375" y="187" key="com.intellij.ide.util.TipDialog/0.0.1360.728@0.0.1360.728" timestamp="1589985851307" />
   </component>
 </project>

@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Welcome!{% endblock %}</title>
     <link rel="shortcut icon" sizes="200x200" href="http://cv-boudaoud.biz.ht/images/cv-hb.ico" type="image/x-icon"/>
     <meta name="author" lang="fr" content="Housni BOUDAOUD">
     <meta name="robots" content="Housni, BOUDAOUD, hboudaoud, projets, projets-boudaoud, projets-hboudaoud"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=0.9">
     <META HTTP-EQUIV="Pragma" CONTENT="cache">
 
     <!-- Auto-Reactualisation de la page -->
@@ -73,78 +74,89 @@
 
                         <div class="collapse navbar-collapse" id="navbarContent">
                             <ul class="navbar-nav mr-auto">
-                                <li class="nav-item active">
+                                <li class="nav-item  mx-1 border active">
                                     <a class="nav-link" href="#">
                                         <i class="fas fa-home"></i>
                                         My store <span class="sr-only">(current)</span>
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item mx-1 border">
                                     <a class="nav-link" href="{{ path('products') }}">
                                         <i class="far fa-list-alt"></i>
-                                        Articles
+                                        All board games
                                     </a>
                                 </li>
-                                {% if categories is defined and categories| length > 0 %}
-                                    <div class=" dropdown">
-                                        <a class="nav-link dropdown-toggle bg-transparent" href="#" id="navbarDropdown"
-                                           role="button"
-                                           data-toggle="dropdown" aria-haspopup="false" aria-expanded="true">
-                                            Category
+                                {% if principalCategories.principalCategories is defined and principalCategories.principalCategories |length >0 %}
+                                    {% set categories =  principalCategories.principalCategories[0].subCategories %}
+                                    <li class="nav-item dropdown  mx-1 border inverse">
+                                        <a class="nav-link dropdown-toggle" href="http://example.com"
+                                           id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                                           aria-expanded="false">
+                                            Board games by category
                                         </a>
-                                        <div class="dropdown-menu bg-transparent" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href={{ path('products') }}>All categories</a>
+                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                             {% for category in categories %}
-                                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                {% if category.subCategories |length > 0  and category.id > 1 %}
+                                                    <li class="dropdown-submenu">
+                                                        <a class="dropdown-item dropdown-toggle inverse"
+                                                           href="#"> {{ category.name | replace({' ': '-'}) }}</a>
 
-                                                    <a class="dropdown-item"
-                                                       href={{ path('products_by_category' ,{'id' : category.id, 'name':category.name}) }}>
-                                                        {{ category.name }}
-                                                    </a>
+                                                        <ul class="dropdown-menu">
 
-                                                </div>
+                                                            <li>
+                                                                <a class="dropdown-item inverse"
+                                                                   href="{{ path(
+                                                                       'products_by_category',
+                                                                       {'id':category.id,'name':category.name|replace({' ': '-'})}
+                                                                   ) }}"
+                                                                >
+                                                                    All {{ category.name }}
+                                                                </a>
+                                                            </li>
+                                                            {% for item in category.subCategories %}
+                                                                {% if item.subCategories |length > 0 %}
+                                                                    <li>
+                                                                        <a class="dropdown-item inverse"
+                                                                           href="{{ path(
+                                                                               'products_by_category',
+                                                                               {'id':item.id,'name':item.name|replace({' ': '-'})}
+                                                                           ) }}"
+                                                                        >
+                                                                            {{ item.name }}
+                                                                        </a>
+                                                                    </li>
+                                                                {% else %}
+                                                                    <li>
+                                                                        <a class="dropdown-item inverse"
+                                                                           href="{{ path(
+                                                                               'products_by_category',
+                                                                               {'id':item.id,'name':item.name|replace({' ': '-'})}
+                                                                           ) }}"
+                                                                        >
+                                                                            {{ item.name }}
+                                                                        </a>
+                                                                    </li>
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                        </ul>
+                                                    </li>
+                                                {% else %}
+                                                    <li>
+                                                        <a class="dropdown-item inverse"
+                                                           href="{{ path(
+                                                               'products_by_category',
+                                                               {'id':category.id,'name':category.name|replace({' ': '-'})}
+                                                           ) }}"
+                                                        >
+                                                            {{ category.name }}
+                                                        </a>
+                                                    </li>
+                                                {% endif %}
                                             {% endfor %}
-                                        </div>
-                                    </div>
+                                        </ul>
+                                    </li>
+
                                 {% endif %}
-                                </li>
-
-
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="http://example.com"
-                                       id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                                       aria-expanded="false">
-                                        Categories {{ principalCategories.principalCategories| length }}
-                                    </a>
-                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                        {% for category in principalCategories.principalCategories %}
-                                            {% if category.subCategories |length > 0 %}
-                                            <li class="dropdown-submenu">
-                                                <a class="dropdown-item dropdown-toggle"
-                                                   href="#">
-                                                    {{ category.name }}</a>
-
-                                                <ul class="dropdown-menu">
-                                                    {% for item in category.subCategories %}
-                                                        <li>
-                                                            <a class="dropdown-item"
-                                                               href="{{ path('products_by_category',{'id':item.id,'name':item.name}) }}">
-                                                                {{ item.name }}
-                                                            </a>
-                                                        </li>
-                                                    {% endfor %}
-                                                </ul>
-                                            </li>
-                                            {% else %}
-                                                <li>
-                                                    <a class="dropdown-item" href="{{ path('products_by_category',{'id':category.id,'name':category.name}) }}">
-                                                        {{ category.name }}
-                                                    </a>
-                                                </li>
-                                            {% endif %}
-                                        {% endfor %}
-                                    </ul>
-                                </li>
                             </ul>
                         </div>
                     </div>
@@ -209,28 +221,28 @@
                         {#            </form>#}
                     </div>
                 </div>
+            </nav>
+            {#      the title h1 of the view   #}
+            <div class="align-items-center w-100 m-0">
+                <h1><small>{% block h1 %}{% endblock %}</small></h1>
+            </div>
         </div>
-        </nav>
 
-        {#      the title h1 of the view   #}
-        <div class="align-items-center w-100 m-0">
-            <h1><small>{% block h1 %}{% endblock %}</small></h1>
-        </div>
-
-    </div>
     </div>
 </header>
-{% block body %}{% endblock %}
+<section class="container-fluid">
+    {% block body %}{% endblock %}
+</section>
 
 <footer>
     footer
 </footer>
 
+<script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
 
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-        crossorigin="anonymous"
-></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
         crossorigin="anonymous"

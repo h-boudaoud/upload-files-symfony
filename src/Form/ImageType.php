@@ -18,7 +18,7 @@ class ImageType extends AbstractType
     {
         $builder
             ->add('saveTo',ChoiceType::class, [
-                'attr'=> ['class'=>'form-control'],
+                'attr'=> ['class'=>'form-control js_image_saveTo'],
                 'choices'  => [
                     'Folder (file)' => 'folder',
                     'Database (Binary)' => 'database',
@@ -37,7 +37,7 @@ class ImageType extends AbstractType
                 ],
                 'required' => false,
                 'label' => 'Upload new file',
-                //'multiple' =>  'multiple'
+                'multiple' =>  false
             ])
         ;
     }

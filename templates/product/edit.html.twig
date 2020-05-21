@@ -1,13 +1,10 @@
-{% extends 'base.nav.left.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {#      the view title      #}
 {% block title controller_name %}
 
 {#      The view style sheet    #}
 {% block stylesheets %}
-    article br{
-    margin-top:1rem;
-    }
 {% endblock %}
 
 
@@ -16,103 +13,191 @@
 
 
 {#      Block body of the view   #}
-{% block navigationLeft %}
-    <nav class="sticky-top navbar navbar-dark">
-        <ul>
-            <li>
-                <a href="" class="btn">
-                    <i class="fa fa-edit"></i> Edit
-                </a>
-            </li>
-            <li>
-                <a href="" class="btn">
-                    <i class="fa fa-trash"></i> Delete
-                </a>
-            </li>
-            <li>
-                <a href="" class="btn">
-                    <i class="fa fa-plus-square" aria-hidden="true"></i> New
-                </a>
-            </li>
-            <li>
-                <a href="" class="btn">
-                    <i class="fa fa-comment"></i> New comment
-                </a>
-            </li>
-        </ul>
-    </nav>
-{% endblock %}
+{#{% block navigationLeft %}#}
+{#    <nav class="sticky-top navbar navbar-dark">#}
+{#        <ul>#}
+{#            <li>#}
+{#                <a href="" class="btn">#}
+{#                    <i class="fa fa-edit"></i> Edit#}
+{#                </a>#}
+{#            </li>#}
+{#            <li>#}
+{#                <a href="" class="btn">#}
+{#                    <i class="fa fa-trash"></i> Delete#}
+{#                </a>#}
+{#            </li>#}
+{#            <li>#}
+{#                <a href="" class="btn">#}
+{#                    <i class="fa fa-plus-square" aria-hidden="true"></i> New#}
+{#                </a>#}
+{#            </li>#}
+{#            <li>#}
+{#                <a href="" class="btn">#}
+{#                    <i class="fa fa-comment"></i> New comment#}
+{#                </a>#}
+{#            </li>#}
+{#        </ul>#}
+{#    </nav>#}
+{#{% endblock %}#}
 
-{% block content %}
-    <h2>Product : {% if product.id > 0 %}Edit {{ product.name }}{% else %}New{% endif %}</h2>
+{% block body %}
+    {% block content %}
+        <div class="container m-auto pb-5 bg-white">
+            <h2>Product : {% if product.id > 0 %}Edit {{ product.name }}{% else %}New{% endif %}</h2>
+            <div>
 
-    <div class="container m-2 pb-5 bg-white">
-
-        {{ form_start(form) }}
-        <div class="my-custom-class-for-errors {% if form_errors(form) %}alert alert-danger {% endif %}">
-            {{ form_errors(form) }}
-        </div>
-
-        <div class="row">
-
-            <div class="col-6">
-
-                {{ form_label(form.name) }}
-                {{ form_widget(form.name) }}
-
-                <small>{{ form_help(form.name) }}</small>
-
-                <div class="form-error">
-                    {{ form_errors(form.name) }}
+                {{ form_start(form) }}
+                <div class="my-custom-class-for-errors {% if form_errors(form) %}alert alert-danger {% endif %}">
+                    {{ form_errors(form) }}
                 </div>
-            </div>
-            <div class="col-6">
-                {{ form_label(form.published) }}
-                {{ form_widget(form.published) }}
 
-                <small>{{ form_help(form.published) }}</small>
+                <div class="jumbotron row py-3">
 
-                <div class="form-error">
-                    {{ form_errors(form.published) }}
-                </div>
-            </div>
-            <div class="col-4">
-                {{ form_label(form.price) }}
-                {{ form_widget(form.price) }}
+                    <div class="col-sm-6 my-2">
 
-                <small>{{ form_help(form.price) }}</small>
+                        {{ form_label(form.name) }}
+                        {{ form_widget(form.name) }}
 
-                <div class="form-error">
-                    {{ form_errors(form.price) }}
-                </div>
-            </div>
-            <div class="col-4">
-                {{ form_row(form.storedValue) }}
-            </div>
-            <div class="col-4">
-                {{ form_row(form.storedAlarm) }}
-            </div>
-            <div class="col-6">
-                {{ form_row(form.description) }}
-            </div>
-            <div class="col-6">
-                <div class="form-group">
-                        {{ form_widget(form.images) }}
-                        <br/><small>{{ form_help(form.images) }}</small>
-                        <div id="listNewFiles"></div>
+                        <small>{{ form_help(form.name) }}</small>
+
                         <div class="form-error">
-                            {{ form_errors(form.images) }}
+                            {{ form_errors(form.name) }}
                         </div>
+                    </div>
+                    <div class="col-sm-6 my-2">
+                        {{ form_label(form.published) }}
+                        {{ form_widget(form.published) }}
+
+                        <small>{{ form_help(form.published) }}</small>
+
+                        <div class="form-error">
+                            {{ form_errors(form.published) }}
+                        </div>
+                    </div>
+                    <div class="col-sm-4 my-2">
+                        {{ form_label(form.price) }}
+                        {{ form_widget(form.price) }}
+
+                        <small>{{ form_help(form.price) }}</small>
+
+                        <div class="form-error">
+                            {{ form_errors(form.price) }}
+                        </div>
+                    </div>
+                    <div class="col-sm-4 my-2">
+                        {{ form_row(form.storedValue) }}
+                    </div>
+                    <div class="col-sm-4 my-2">
+                        {{ form_row(form.storedAlarm) }}
+                    </div>
+                    <div class="col-md-6 my-0">
+                        <div class="my-2">
+                            {{ form_row(form.category) }}
+                        </div>
+                    </div>
+                    <div class="col-12 my-2">
+                            {{ form_row(form.description) }}
+                    </div>
+
+
+                    <div class="col-md-12 my-2 row">
+                        <div class="form-group col-lg-8">
+                            <i class="fa fa-upload"></i> {{ form_label(form.images.image) }}
+                            <div class="col-sm-9  file-upload-wrapper">
+                                {{ form_widget(form.images.image) }}
+                                <br/><small>{{ form_help(form.images.image) }}</small>
+                                <div id="listNewFiles"></div>
+                                <div class="form-error">
+                                    {{ form_errors(form.images.image) }}
+                                </div>
+
+                            </div>
+                        </div>
+                        <div id="saveTo" class="col-lg-4">
+                            {{ form_label(form.images.saveTo) }} <i class="fa fa-folder"></i>
+                            {{ form_widget(form.images.saveTo) }}
+
+                            <small>{{ form_help(form.images.saveTo) }}</small>
+
+                            <div class="form-error">
+                                {{ form_errors(form.images.saveTo) }}
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+{#                    <div class="col-md-12 my-2 row">#}
+{#                        <div id="saveTo" class="col-lg-4">#}
+{#                            {{ form_label(form.saveTo) }} <i class="fa fa-folder"></i>#}
+{#                            {{ form_widget(form.saveTo) }}#}
+
+{#                            <small>{{ form_help(form.saveTo) }}</small>#}
+
+{#                            <div class="form-error">#}
+{#                                {{ form_errors(form.saveTo) }}#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <div class="form-group col-lg-8">#}
+{#                            <i class="fa fa-upload"></i> {{ form_label(form.files) }}#}
+{#                            <div class="col-sm-9  file-upload-wrapper">#}
+{#                                {{ form_widget(form.files) }}#}
+{#                                <br/><small>{{ form_help(form.files) }}</small>#}
+{#                                <div id="listNewFiles"></div>#}
+{#                                <div class="form-error">#}
+{#                                    {{ form_errors(form.files) }}#}
+{#                                </div>#}
+
+{#                            </div>#}
+{#                        </div>#}
+
+{#                    </div>#}
+                    <div class="my-2">
+                        <button type="submit"
+                                class="btn btn-dark">{% if product.id > 0 %}Update {{ product.name }}{% else %}Add{% endif %}
+                            product
+                        </button>
+                    </div>
                 </div>
+                {{ form_end(form) }}
+            </div>
+
+            <div class="row my-2">
+
+                {% for image in product.images %}
+                    <div id="image_{{ image.id }}" class="col-sm-3">
+                        <div style="width: 100%; max-height: 20vmin; height: auto">
+                            {% if image.dataBase64|length > 0 %}
+                                <object class="databasefile " type="{{ image.mimeType }}"
+                                        style="width: auto; max-height: 20vmin; height: 100%"
+                                        data="data:{{ image.mimeType }};base64,{{ image.database64 }}">
+                                    The “object” tag is not supported by your browser.
+                                </object>
+                            {% else %}
+
+                                <br/><img src="{{ asset(image.folder)~image.imageName }}"
+                                          alt="{{ image.imageName }}"
+                                          style="width: 100% ; max-height: 20vmin"
+                            />
+
+                            {% endif %}
+                        </div>
+                        <div>
+                            <a href="{{ path('delete_image',{'id':image.id}) }}"
+                               class="btn btn-danger js-Ajax-delete-image">
+                                <i class="fa fa-trash"></i>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
         </div>
-    </div>
-    <div>
-        <button type="submit" class="btn btn-dark">{% if product.id > 0 %}Update{{ product.name }}{% else %}Add{% endif %} product</button>
-    </div>
 
-    {{ form_end(form) }}
-    </div>
+
+
+    {% endblock %}
 
 {% endblock %}
 {#      End block body of the view   #}
@@ -122,7 +207,37 @@
 {#      The view JavaScript    #}
 {#<script>#}
 {% block javascripts %}
+    <script type="application/javascript">
+        $('.js-Ajax-delete-image').click(function (event) {
+            event.preventDefault();
+            const url = $(this).attr("href");
+            $.ajax({
+                type: "delete",
+                url: url,
+                success: function (data) {
+                    console.log(data);
+                    $('#image_'+data.data.id).remove();
+                    alert(data.data.message);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log(
+                        'Status' , xhr.status,
+                        'xhr ', xhr,
+                        '\tajaxOptions', ajaxOptions,
+                        '\tthrownError', thrownError
+                    );
+                    if (xhr.status == 400) {
+                        alert(xhr.responseJSON.data.message);
+                    }
+                    else {
+                        alert('Error : '+xhr.status+'\nAn error occurred while deleting the image');
+                    }
+                },
 
+            });
+        });
+
+    </script>
 {% endblock %}
 {#</script>#}
 

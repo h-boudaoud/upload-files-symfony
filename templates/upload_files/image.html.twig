@@ -1,4 +1,4 @@
-{% extends 'Layout.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}Hello UploadFilesController!{% endblock %}
 
@@ -6,68 +6,63 @@
 {% block stylesheets %}
 {% endblock %}
 
-{% block body %}
-    <style>
+{% block content %}
+    <h2>Upload image</h2>
+    {{ form_start(form) }}
+    <div class="my-custom-class-for-errors {% if form_errors(form) %}alert alert-danger {% endif %}">
+        {{ form_errors(form) }}
+    </div>
 
-    </style>
-
-    <div class="jumbotron">
-        <h1> Upload Image</h1>
-        {{ form_start(form) }}
-        <div class="my-custom-class-for-errors {% if form_errors(form) %}alert alert-danger {% endif %}">
-            {{ form_errors(form) }}
-        </div>
-
-        <div class="row">
-            <div class="col-6">
-                <div class="form-group">
-                    <i class="fa fa-upload"></i> {{ form_label(form.image) }}
-                    <div class="col-sm-9  file-upload-wrapper">
-                        {{ form_widget(form.image) }}
-                        <br/><small>{{ form_help(form.image) }}</small>
-                        <div id="listNewFiles"></div>
-                        <div class="form-error">
-                            {{ form_errors(form.image) }}
-                        </div>
-
+    <div class="jumbotron row">
+        <div class="col-6">
+            <div class="form-group">
+                <i class="fa fa-upload"></i> {{ form_label(form.image) }}
+                <div class="col-sm-9  file-upload-wrapper">
+                    {{ form_widget(form.image) }}
+                    <br/><small>{{ form_help(form.image) }}</small>
+                    <div id="listNewFiles"></div>
+                    <div class="form-error">
+                        {{ form_errors(form.image) }}
                     </div>
-                </div>
-            </div>
 
-            <div class="col-6" id="saveTo">
-                {{ form_label(form.saveTo) }} <i class="fa fa-folder"></i>
-                {{ form_widget(form.saveTo) }}
-
-                <small>{{ form_help(form.saveTo) }}</small>
-
-                <div class="form-error">
-                    {{ form_errors(form.saveTo) }}
                 </div>
             </div>
         </div>
-        <div>
-            <button type="submit" class="btn btn-dark">Upload files</button>
-        </div>
 
-        {{ form_end(form) }}
+        <div class="col-6" id="saveTo">
+            {{ form_label(form.saveTo) }} <i class="fa fa-folder"></i>
+            {{ form_widget(form.saveTo) }}
+
+            <small>{{ form_help(form.saveTo) }}</small>
+
+            <div class="form-error">
+                {{ form_errors(form.saveTo) }}
+            </div>
+        </div>
     </div>
+    <div>
+        <button type="submit" class="btn btn-dark">Upload files</button>
+    </div>
+
+    {{ form_end(form) }}
+
     {% if image %}
-    <div class="container reg">
-        created : {{ image.createdAt | date('Y-m-d') }} at {{ image.createdAt | date('H:i:s') }}
-        Name : {{ image.imageName }}
-        Client original name : {{ image.clientOriginalName }}
-        {% if image.saveTo =='database' %}
-            <object class="databasefile" type="{{ image.mimeType }}" style="max-height: 20vh;"
-                    data="data:{{ image.mimeType }};base64,{{ image.database64 }}">
-                The “object” tag is not supported by your browser.
-                <br/><a href="{{ asset(image.database64) }}">{{ image.imageName }}</a>
-            </object>
-        {% else %}
+        <div class="container reg">
+            created : {{ image.createdAt | date('Y-m-d') }} at {{ image.createdAt | date('H:i:s') }}
+            Name : {{ image.imageName }}
+            Client original name : {{ image.clientOriginalName }}
+            {% if image.saveTo =='database' %}
+                <object class="databasefile" type="{{ image.mimeType }}" style="max-height: 20vh;"
+                        data="data:{{ image.mimeType }};base64,{{ image.database64 }}">
+                    The “object” tag is not supported by your browser.
+                    <br/><a href="{{ asset(image.database64) }}">{{ image.imageName }}</a>
+                </object>
+            {% else %}
 
-            <br/><img src="{{ asset(image.folder)~image.imageName }}" alt="{{ image.imageName }}" />
+                <br/><img src="{{ asset(image.folder)~image.imageName }}" alt="{{ image.imageName }}"/>
 
-        {% endif %}
-    </div>
+            {% endif %}
+        </div>
     {% endif %}
 {% endblock %}
 

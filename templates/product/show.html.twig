@@ -1,0 +1,164 @@
+{% extends 'base.nav.left.html.twig' %}
+
+{#      the view title      #}
+{% block title controller_name %}
+
+{#      The view style sheet    #}
+{% block stylesheets %}
+{% endblock %}
+
+
+{#      the title h1 of the view   #}
+{% block h1 "Hello "~ controller_name %}
+
+
+{#Block body of the view#}
+{% block navigationLeft %}
+    <nav class="sticky-top navbar navbar-dark">
+        <ul>
+            <li>
+                <a href="{{ path('product_edit',{'id':product.id, 'name': product.name| replace({' ': '-'})}) }}"
+                   class="btn">
+                    <i class="fa fa-edit"></i> <span class="d-none d-sm-inline">Edit</span>
+                </a>
+            </li>
+            {#            <li>#}
+            {#                <a href="{{ path('product_remove',{'id':product.id, 'name': product.name| replace({' ': '-'})}) }}" class="btn">#}
+            {#                    <i class="fa fa-trash"></i> <span class="d-none d-sm-inline">Delete</span>#}
+            {#                </a>#}
+            {#            </li>#}
+            {#            <li>#}
+            {#                <a href="{{ path('comment_new',{'id':product.id, 'name'| replace({' ': '-'})}) }}" class="btn">#}
+            {#                    <i class="fa fa-comment"></i> <span class="d-none d-sm-inline">New comment</span>#}
+            {#                </a>#}
+            {#            </li>#}
+        </ul>
+    </nav>
+{% endblock %}
+
+{#{% block body %}#}
+    {% block content %}
+        <div class="container m-auto pb-5 bg-white">
+            <h2>{% if product.id > 0 %} {{ product.name }}{% endif %} : <small>Details</small></h2>
+            <div class="jumbotron row m-0 p-0">
+                <div class="col-sm-4 order-sm-2">
+                    <p>
+                        {{ product.name }}
+                        <br/>{{ product.category.labelform }}
+                        <br/>{{ product.price }} €
+                    </p>
+                    {% if product.storedValue == 0 %}
+                        <p class="alert alert-danger">Soon in stock: available upon request</p>
+                    {% elseif product.storedValue < product.storedAlarm %}
+                        <p class="alert alert-warning">Only {{ product.storedValue }} products in stock</p>
+                    {% else %}
+                        <p class="alert alert-succes">Available product</p>
+                    {% endif %}
+
+                    <small class="text-muted">
+                        {% if product.starRating %}
+                            <span class="js-starRating px-3 badge badge-secondary">
+                                {{ product.starRating }}
+                            </span>
+                        {% else %}
+                            <i class="far fa-star px-3 badge badge-secondary"
+                               style="text-decoration: line-through;"> </i>
+
+                        {% endif %}
+                    </small>
+                </div>
+                <div class="col-sm-8 order-sm-1 h-100">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            {% for image in product.images|slice(0, 4) %}
+                                <div class="js-select-image mx-0 p-0 my-1">
+                                    {% if image.dataBase64|length > 0 %}
+                                        <object class="databasefile " type="{{ image.mimeType }}"
+                                                style="max-width: 100%; max-height: 100%; width: auto; height: auto;"
+                                                data="data:{{ image.mimeType }};base64,{{ image.database64 }}">
+                                            The “object” tag is not supported by your browser.
+                                        </object>
+                                    {% else %}
+
+                                        <img src="{{ asset(image.folder)~image.imageName }}"
+                                             alt="{{ image.imageName }}"
+                                        />
+
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
+
+                        <div class="col-sm-10 d-none d-sm-block m-0 p-0">
+                            <div id="js-show-image" class="container-fluid h-100">
+                                {% if product.images |length >0 %}
+                                {% for image in product.images %}
+                                    {% if loop.index ==1 %}
+                                        {% if image.dataBase64|length > 0 %}
+                                            <object class="databasefile " type="{{ image.mimeType }}"
+                                                    style="max-width: 100%; height: 40vmin"
+                                                    data="data:{{ image.mimeType }};base64,{{ image.database64 }}">
+                                                The “object” tag is not supported by your browser.
+                                            </object>
+                                        {% else %}
+
+                                            <br/><img src="{{ asset(image.folder)~image.imageName }}"
+                                                      alt="{{ image.imageName }}"
+                                                      style="max-width: 100% ; height: 40vmin"
+                                        />
+
+                                        {% endif %}
+                                    {% endif %}
+
+                                {% endfor %}
+                                {% else %}
+                                    <img class="d-block my-1"
+                                         src="{{ asset("asset/img/no-image-available-icon.jpg") }}"
+                                         alt="No image available"
+                                         style="max-width: 100% ; height: 40vmin"
+                                    />
+                                {% endif %}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <div>
+                <p>
+                    {{ product.description| replace({"\n": "</p><p>"})  | raw }}
+                </p>
+            </div>
+
+
+        </div>
+
+    {% endblock %}
+
+{#{% endblock %}#}
+{#      End block body of the view   #}
+
+
+
+{#      The view JavaScript    #}
+{#<script>#}
+{% block javascripts %}
+    <script>
+
+        $(document).ready(function () {
+
+            const showImage = $('#js-show-image');
+            const h = showImage.height();
+            let selectImage = $(".js-select-image");
+            selectImage.hover(function () {
+                const selected = $(this).first().clone().css('height', h);
+                showImage.html(selected);
+                console.log("showImage.html() ", showImage.html())
+
+            });
+        });
+    </script>
+{% endblock %}
+{#</script>#}
+

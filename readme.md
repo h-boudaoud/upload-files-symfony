@@ -1,4 +1,5 @@
 ## Upload file with Symfony
+#### Symfony 5.0.8
 Ce code sert uniquement à justifier mes connaissances du développements d'application avec Symfony.
 
 This code is only used to justify my knowledge of application development with Symfony.
@@ -74,7 +75,7 @@ Alter Entities, controllers, forms and templates
 
 #### Configuring the Database
 customize environment variable called DATABASE_URL inside .env
- ```
+```
 # create Database
 php bin/console doctrine:database:create
 
@@ -82,10 +83,18 @@ php bin/console doctrine:database:create
 php bin/console make:migration
 php bin/console doctrine:migrations:migrate
 
- ```
+```
+ #### Create random fixtures  Faker
  
+```
+ # to load a "fake" dataset into a database
+ composer require --dev doctrine/doctrine-fixtures-bundle
  
-
+ # load  random Faker devices
+ composer req --dev fzaninotto/faker
+ 
+```
+All the types of data that Faker can generate at https://github.com/fzaninotto/Faker#formatters
 
 
 ## Author

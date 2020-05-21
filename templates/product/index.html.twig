@@ -1,13 +1,10 @@
-{% extends 'base.nav.left.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {#      the view title      #}
 {% block title controller_name %}
 
 {#      The view style sheet    #}
 {% block stylesheets %}
-    article br{
-    margin-top:1rem;
-    }
 {% endblock %}
 
 
@@ -16,87 +13,245 @@
 
 
 {#      Block body of the view   #}
-{% block navigationLeft %}
-    <nav class="sticky-top navbar navbar-dark">
-        <ul>
-            <li>
-                <a href="" class="btn">
-                    <i class="fa fa-edit"></i> Edit
-                </a>
-            </li>
-            <li>
-                <a href="" class="btn">
-                    <i class="fa fa-trash"></i> Delete
-                </a>
-            </li>
-            <li>
-                <a href="" class="btn">
-                   <i class="fa fa-plus-square" aria-hidden="true"></i> New
-                </a>
-            </li>
-            <li>
-                <a href="" class="btn">
-                    <i class="fa fa-comment"></i> New comment
-                </a>
-            </li>
-        </ul>
-    </nav>
-{% endblock %}
+{#{% block navigationLeft %}#}
+{#    <nav class="sticky-top navbar navbar-dark">#}
+{#        <ul>#}
+{#            <li>#}
+{#                <a href="" class="btn">#}
+{#                    <i class="fa fa-edit"></i> Edit#}
+{#                </a>#}
+{#            </li>#}
+{#            <li>#}
+{#                <a href="" class="btn">#}
+{#                    <i class="fa fa-trash"></i> Delete#}
+{#                </a>#}
+{#            </li>#}
+{#            <li>#}
+{#                <a href="" class="btn">#}
+{#                    <i class="fa fa-plus-square" aria-hidden="true"></i> New#}
+{#                </a>#}
+{#            </li>#}
+{#            <li>#}
+{#                <a href="" class="btn">#}
+{#                    <i class="fa fa-comment"></i> New comment#}
+{#                </a>#}
+{#            </li>#}
+{#        </ul>#}
+{#    </nav>#}
+{#{% endblock %}#}
 
 {% block content %}
-{#    Page Category  {{ id }}#}
-{#    <br/>{% if category.name %}{{ category.name }} {% endif %}#}
-{#    <hr/>#}
-{#    <div class="row">#}
-{#        <div class="col-lg-6">#}
-{#            <img class="card-img-top w-100"#}
-{#                 src="https://i.picsum.photos/id/{{ article.id }}/500/300.jpg"#}
-{#                 alt="{{ article.name |capitalize }}">#}
-{#        </div>#}
-{#        <div class="col-lg-6">#}
-{#            <p>#}
-{#                {{ article.id }} : {{ article.name }}#}
-{#            </p>#}
-{#            <p>#}
-{#                {{ article.createdAt |date("m/d/Y") }}#}
-{#            </p>#}
-{#        </div>#}
-{#    </div>#}
-{#    <div>#}
-{#        <p class="article">#}
-{#            {{ article.description |nl2br }}#}
-{#        </p>#}
-{#    </div>#}
-{#    <div>#}
-{#        {% for comment in article.notifications %}#}
-{#            <div class="my-3 px-3 bg-light comment">#}
-{#                <h3>#}
-{#                    {{ comment.id }} : {{ comment.article.name }}#}
-{#                </h3>#}
-{#                <p>#}
-{#                    {{ comment.content |nl2br }}#}
-{#                </p>#}
-{#                <div>#}
-{#                    {{ comment.createdAt |date('d/m/Y') }} at {{ comment.createdAt |date('h:m:s') }}#}
 
-{#                    <div class="d-inline-block float-right">#}
+    <h2>{% if category and category.name %}{{ category.name }} games{% else %}Games all categories{% endif %} </h2>
+    <a href="{{ path('product_new') }}"
+       class="btn btn-inverse"
+       title="Add new product"
+    >
+        <i class="fa fa-plus"></i>
+        <span class="d-none d-md-inline">New product</span>
+    </a>
+    <hr/>
 
-{#                        {% if comment.starRating %}#}
-{#                            <span class="starRating px-3 badge badge-secondary">#}
-{#                                {{ comment.starRating }}#}
-{#                            </span>#}
-{#                        {% else %}#}
-{#                            <i class="far fa-star px-3 badge badge-secondary"#}
-{#                               style="text-decoration: line-through;"> </i>#}
+    {% if products |length == 0 %}
+        The product list is empty
+    {% else %}
+        <section id="carousel" class="mx-auto inverse"
+                 style="width: 90%; height: 46vmin;">
+            <div id="carouselproducts" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    {% for product in products %}
+                        <li data-target="#carouselproducts" data-slide-to="{{ product.id }}"
+                            {% if loop.index ==1 %}class="active"{% endif %}></li>
+                    {% endfor %}
+                </ol>
+                <div class="carousel-inner w-75 mx-auto">
+                    {% for product in products |slice(0,5) %}
+                        <div class="carousel-item {% if loop.index ==1 %}active{% endif %} product_{{ product.id }}">
+                            <div class="row container">
+                                <div class="col-sm-6 d-sm-block d-none container-fluid">
+                                    <a href="{{ path('product_by_id', {'id':product.id, 'name':product.name}) }}">
+                                        {% if product.images|length>0 %}
+                                            {% for image in product.images %}
+                                                {% if loop.index ==1 %}
+                                                    {% if image.dataBase64|length > 0 %}
 
-{#                        {% endif %}#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#        {% endfor %}#}
-{#    </div>#}
+                                                        <object class="databasefile d-block my-1"
+                                                                type="{{ image.mimeType }}"
+                                                                style="max-width: 100%; max-height: 45vmin;"
+                                                                data="data:{{ image.mimeType }};base64,{{ image.database64 }}">
+                                                            The “object” tag is not supported by your browser.
+                                                        </object>
+                                                    {% else %}
+                                                        <img class="d-block my-1"
+                                                             src="{{ asset(image.folder)~image.imageName }}"
+                                                             alt="{{ image.imageName }}"
+                                                             style="max-width: 100%; height: 45vmin;"
+                                                        />
 
-    Products
+                                                    {% endif %}
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% else %}
+                                            <img class="d-block my-1"
+                                                 src="{{ asset("asset/img/no-image-available-icon.jpg") }}"
+                                                 alt="No image available"
+                                                 style="max-width: 100%; height: 45vmin"
+                                            />
+                                        {% endif %}
+
+                                        {#                                <img class="d-block w-50 mx-auto"#}
+                                        {#                                     src="https://i.picsum.photos/id/{{ product.id }}/500/300.jpg"#}
+                                        {#                                     alt="{{ product.name |capitalize }}">#}
+                                    </a>
+                                </div>
+                                <div class="col-sm-6 d-sm-block d-none h-100 py-auto align-bottom">
+                                    <div class="container-fluid mt-5">
+                                        <h5>{{ product.name |capitalize }} </h5>
+                                        <br/> price : {{ product.price |replace({'.':' € '}) }}
+
+                                        {% if product.storedValue == 0 %}
+                                            <span class="d-inline-block alert-danger">
+                                                Soon in stock: available upon request
+                                        </span>
+                                        {% elseif product.storedValue <= product.storedAlarm %}
+                                            <span class="d-inline-block alert-warning">
+                                                Only {{ product.storedValue }} products in stock
+                                        </span>
+                                        {% endif %}
+                                        <div style="overflow: hidden;text-overflow: ellipsis; height: 2rem;white-space: nowrap; ">
+                                            {{ product.description |capitalize }}
+                                        </div>
+
+
+                                        <br/> <small class="text-muted">
+                                            {% if product.starRating %}
+                                                <span class="js-starRating px-3 badge badge-secondary">
+                                                    {{ product.starRating }}
+                                                </span>
+                                            {% else %}
+                                                <i class="far fa-star px-3 badge badge-secondary"
+                                                   style="text-decoration: line-through;"> </i>
+
+                                            {% endif %}
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-caption d-none d-md-block">
+
+                            </div>
+                        </div>
+
+                    {% endfor %}
+                </div>
+                <a class="carousel-control-prev" href="#carouselproducts" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselproducts" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+
+        </section>
+
+        <hr/>
+        <section id="productsList" class="row">
+
+            {% for product in products %}
+                <article class="col-lg-4 col-md-6 mb-4 product_{{ product.id }}">
+                    <div class="card h-150">
+                        <div class="text-center">
+                            <a href="{{ path('product_by_id', {'id':product.id, 'name':product.name}) }}">
+                                {% if product.images|length>0 %}
+                                    {% for image in product.images %}
+                                        {% if loop.index ==1 %}
+                                            {% if image.dataBase64|length > 0 %}
+                                                <object class="databasefile " type="{{ image.mimeType }}"
+                                                        style="max-width: 100%; max-height: 20vmin"
+                                                        data="data:{{ image.mimeType }};base64,{{ image.database64 }}">
+                                                    The “object” tag is not supported by your browser.
+                                                </object>
+                                            {% else %}
+
+                                                <br/><img src="{{ asset(image.folder)~image.imageName }}"
+                                                          alt="{{ image.imageName }}"
+                                                          style="max-width: 100% ; max-height: 20vmin"
+                                            />
+
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endfor %}
+                                {% else %}
+
+                                    <img src="{{ asset("asset/img/no-image-available-icon.jpg") }}"
+                                         alt="No image available"
+                                         style="max-width: 100% ; max-height: 20vmin"
+                                    />
+                                {% endif %}
+
+                                {#                                <img class="card-img-top w-100"#}
+                                {#                                     src="https://i.picsum.photos/id/{{ product.id }}/500/300.jpg"#}
+                                {#                                     alt="{{ product.name |capitalize }}">#}
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                <a href="{{ path('product_by_id', {'id':product.id, 'name':product.name}) }}">
+                                    {{ product.name |capitalize }}
+                                </a>
+                            </h4>
+                            <h4>{{ product.price }} €</h4>
+                            <h4>{{ product.category.name }} </h4>
+                            <div style="overflow: hidden;text-overflow: ellipsis; height: 5rem;">
+                                <p>
+                                    {{ product.description |nl2br }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="card-footer alert
+                                alert-{% if product.storedValue == 0 %}danger
+                            {% elseif product.storedValue <= product.storedAlarm %}warning
+                            {% else %}success{% endif %}
+                            " role="alert">
+
+                            <a href="{{ path('product_edit',{'id':product.id, 'name': product.name| replace({' ': '-'})}) }}"
+                               class="btn btn-inverse">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <a href="{{ path('product_delete',{'id':product.id}) }}"
+                               class="btn btn-danger js-Ajax-delete-product">
+                                <i class="fa fa-trash"></i>
+                            </a>
+
+                            {% if product.storedValue == 0 %}
+                                Soon in stock: available upon request
+                            {% elseif product.storedValue <= product.storedAlarm %}
+                                Only {{ product.storedValue }} products in stock
+                            {% else %}
+                                Available
+                            {% endif %}
+
+
+                            <small class="text-muted">
+                                {% if product.starRating %}
+                                    <span class="js-starRating px-3 badge badge-secondary">
+                                {{ product.starRating }}
+                            </span>
+                                {% else %}
+                                    <i class="far fa-star px-3 badge badge-secondary"
+                                       style="text-decoration: line-through;"> </i>
+
+                                {% endif %}
+                            </small>
+                        </div>
+                    </div>
+                </article>
+            {% endfor %}
+        </section>
+    {% endif %}
+
 
 {% endblock %}
 {#      End block body of the view   #}
@@ -104,9 +259,38 @@
 
 
 {#      The view JavaScript    #}
-{#<script>#}
 {% block javascripts %}
+    <script type="application/javascript">
+        $('.js-Ajax-delete-product').click(function (event) {
+            event.preventDefault();
+            const url = $(this).attr("href");
+            console.log($(this).attr("href"));
+            $.ajax({
+                type: "delete",
+                url: url,
+                success: function (data) {
+                    console.log(data);
+                    $('.product_' + data.data.id).remove();
+                    alert(data.data.message);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log(
+                        'Status', xhr.status,
+                        'xhr ', xhr,
+                        '\tajaxOptions', ajaxOptions,
+                        '\tthrownError', thrownError
+                    );
+                    if (xhr.status == 400) {
+                        alert(xhr.responseJSON.data.message);
+                    } else {
+                        alert('Error : ' + xhr.status + '\nAn error occurred while deleting the image');
+                    }
+                },
+
+            });
+        });
+
+    </script>
 
 {% endblock %}
-{#</script>#}
 

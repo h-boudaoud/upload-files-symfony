@@ -16,7 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Image
 {
 
-    public const SAVE_TO =['database','folder'];
+    public const SAVE_TO = ['database', 'folder'];
 
 //    https://developer.mozilla.org/fr/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types
     public const MIME_TYPES = [
@@ -76,15 +76,15 @@ class Image
      *     message="File saving failed. The location chosen for recording is not authorized"
      * )
      */
-    public $saveTo;
+    private $saveTo;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Product::class, inversedBy="images" )
+     */
+    private $product;
 
 
     private $image;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Product::class, inversedBy="images" , cascade = {"persist"})
-     */
-    private $product;
 
     public function getId(): ?int
     {
@@ -96,10 +96,29 @@ class Image
         return $this->image;
     }
 
-    public function setImage(UploadedFile $file=null): self
+
+    /**
+     * @return mixed
+     */
+    public function getSaveTo()
     {
-        //dd(['file'=>$file]);
-        if($file){
+        return $this->saveTo;
+    }
+
+    /**
+     * @param mixed $saveTo
+     */
+    public function setSaveTo($saveTo): void
+    {
+        $this->saveTo = $saveTo;
+        $this->saveTo();
+    }
+
+
+    public function setImage(?UploadedFile $file): self
+    {
+        // dd(['file'=>$file]);
+        if ($file) {
             $this->image = $file;
             $this->clientOriginalName = $file->getClientOriginalName();
             $this->createdAt = new \DateTime();
@@ -107,8 +126,8 @@ class Image
             $this->imageName = uniqid() .
                 $this->createdAt->format('_Y-m-d_h-i-s.') .
                 $file->guessClientExtension();
-            if($this->saveTo =="database"){
-               $this->dataBase64 = base64_encode(\file_get_contents($file));
+            if ($this->dataBase64 == null && $this->saveTo == "database") {
+                $this->dataBase64 = base64_encode(\file_get_contents($file));
             }
         }
 
@@ -141,15 +160,15 @@ class Image
         return $this->folder;
     }
 
-    public function setFolder(?string $folder): self
+    public function setFolder(string $folder): self
     {
-            $this->folder = $folder;
 
+        $this->getImage()->move($this->folder, $this->imageName);
+        $this->folder = $folder;
         return $this;
     }
 
-
-    public function getImageName():?string
+    public function getImageName(): ?string
     {
         return $this->imageName;
     }
@@ -164,5 +183,28 @@ class Image
         $this->product = $product;
 
         return $this;
+    }
+
+    public function saveTo(): void
+    {
+
+        if (
+            !$this->folder
+            && $this->saveTo =="folder"
+        ) {
+            $this->folder = "asset/img/uploads/products/" . ( new \DateTime($this->createdAt))->format('Y-m-d/');
+        }
+        if( $this->dataBase64 == null
+            && $this->saveTo =="database"
+            && $this->image!==null
+        ){
+            $this->dataBase64 = base64_encode(\file_get_contents($this->image));
+        }elseif (
+            $this->folder !== null
+            && $this->saveTo =="folder"
+            && $this->image!==null
+        ){
+            $this->getImage()->move($this->folder, $this->imageName);
+        }
     }
 }

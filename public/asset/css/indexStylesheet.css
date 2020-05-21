@@ -12,10 +12,29 @@
 h1, h2, h3, h4 {font-family: 'Love Ya Like A Sister';  font-weight: normal ; }
 
 
-.reg { color:rgb(27, 38, 49); background:white; }
-.inverse { color:white; background:rgb(27, 38, 49); }
-div { padding: 10px 15px; }
-.right { background:white; width:30%; float: right; font-family: sans-serif; border: 1px solid black; border-width: 0 0 1px 1px;}
+.reg {
+    color:rgb(27, 38, 49);
+    background:white;
+}
+.inverse {
+    color:white;
+    background:rgb(27, 38, 49);
+}
+.btn-inverse {
+    color:white;
+    background:rgba(27, 38, 49, .9);
+}
+.btn-inverse:hover {
+    color:white;
+    background:rgb(27, 38, 49);
+}
+.right {
+    background:white;
+    width:30%; float: right;
+    font-family: sans-serif;
+    border: 1px solid black;
+    border-width: 0 0 1px 1px;
+}
 :root, html, body {
     font-family: 'Tippa' !important;
     margin: 0;
@@ -70,6 +89,9 @@ nav ul{
     border: 2px dashed #222222 ;
     border-radius: 10px/20px;
 
+}
+#productsList > article{
+    margin-top: 1rem;
 }
 
 

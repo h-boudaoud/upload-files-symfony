@@ -1,4 +1,4 @@
-{% extends 'Layout.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}Hello UploadFilesController!{% endblock %}
 
@@ -6,51 +6,45 @@
 {% block stylesheets %}
 {% endblock %}
 
-{% block body %}
-    <style>
-
-    </style>
-
-    <div class="jumbotron">
-        <h1> Upload files</h1>
-        {{ form_start(form) }}
-        <div class="my-custom-class-for-errors {%  if form_errors(form) %}alert alert-danger {% endif %}">
-            {{ form_errors(form) }}
-        </div>
-
-        <div class="row">
-            <div class="col-6">
-                <div class="form-group">
-                    <i class="fa fa-upload"></i> {{ form_label(form.files) }}
-                    <div class="col-sm-9  file-upload-wrapper">
-                        {{ form_widget(form.files) }}
-                        <br/><small>{{ form_help(form.files) }}</small>
-                        <div id="listNewFiles"></div>
-                        <div class="form-error">
-                            {{ form_errors(form.files) }}
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-6" id="saveTo">
-                {{ form_label(form.saveTo) }} <i class="fa fa-folder"></i>
-                {{ form_widget(form.saveTo) }}
-
-                <small>{{ form_help(form.saveTo) }}</small>
-
-                <div class="form-error">
-                    {{ form_errors(form.saveTo) }}
-                </div>
-            </div>
-        </div>
-        <div>
-            <button type="submit" class="btn btn-dark">Upload files</button>
-        </div>
-
-        {{ form_end(form) }}
+{% block content %}
+    <h2> Upload files</h2>
+    {{ form_start(form) }}
+    <div class="my-custom-class-for-errors {% if form_errors(form) %}alert alert-danger {% endif %}">
+        {{ form_errors(form) }}
     </div>
+
+    <div class="jumbotron row">
+        <div class="col-6">
+            <div class="form-group">
+                <i class="fa fa-upload"></i> {{ form_label(form.files) }}
+                <div class="col-sm-9  file-upload-wrapper">
+                    {{ form_widget(form.files) }}
+                    <br/><small>{{ form_help(form.files) }}</small>
+                    <div id="listNewFiles"></div>
+                    <div class="form-error">
+                        {{ form_errors(form.files) }}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-6" id="saveTo">
+            {{ form_label(form.saveTo) }} <i class="fa fa-folder"></i>
+            {{ form_widget(form.saveTo) }}
+
+            <small>{{ form_help(form.saveTo) }}</small>
+
+            <div class="form-error">
+                {{ form_errors(form.saveTo) }}
+            </div>
+        </div>
+    </div>
+    <div>
+        <button type="submit" class="btn btn-dark">Upload files</button>
+    </div>
+
+    {{ form_end(form) }}
     {% if listUrlFiles|length > 0 %}
         <div class="container">
             {% for file in listUrlFiles %}
@@ -60,7 +54,7 @@
                         <object class="databasefile" type="{{ file.mimeType }}" style="max-height: 20vh;"
                                 data="data:{{ file.mimeType }};base64,{{ file.data }}">
                             The “object” tag is not supported by your browser.
-                            <br /><a href="{{ asset(file.data) }}">{{ file.name }}</a>
+                            <br/><a href="{{ asset(file.data) }}">{{ file.name }}</a>
                             <pre>
                                 <cod>
                                     {{ file.data }}
@@ -73,7 +67,7 @@
                             {#                        {% if file.mimeType |split('/')|filter(v => isset(strpos(v, 'image') %}#}
 
                             |image :
-                            <img src="{{ asset(file.data) }}" style="height: 20vh; width: auto"/>
+                            <img src="{{ asset(file.data) }}" style="height: 20vh; width: auto" alt="{{ file.name }}"/>
 
                         {% else %}
 
@@ -82,7 +76,7 @@
                                 <object class="flooder" type="{{ file.mimeType }}" style="max-height: 20vh;width: auto"
                                         data="{{ asset(file.data) }}">
                                     The “object” tag is not supported by your browser.
-                                    <br /><a href="{{ asset(file.data) }}">{{ file.name }}</a>
+                                    <br/><a href="{{ asset(file.data) }}">{{ file.name }}</a>
                                 </object>
                             {% else %}
                                 file
@@ -99,62 +93,50 @@
 {% endblock %}
 
 
-    {% block javascripts %}
-        <script>
+{% block javascripts %}
+    <script>
+        let upload_files_files = $('#upload_files_files');
+        let listNewFiles= $('#listNewFiles');
+        let image = $('.databasefile');
+        image.each(function () {
+            console.log($(this).offsetWidth);
+            console.log($(this).offsetHeight);
+        });
 
-            var image = $('.databasefile')
-            image.each(function () {
-                console.log($(this).offsetWidth)
-                console.log($(this).offsetHeight)
-            })
+        upload_files_files.change(function () {
+            let names = $.map($(this).prop("files"), function (val) {
+                return val.name;
+            });
 
-            $('#upload_files_files').change(function (event) {
-                var names = $.map($(this).prop("files"), function (val) {
-                    return val.name;
-                })
+            listNewFiles.html('');
+            names.forEach(function (name) {
+                listNewFiles.append('<br />' + name);
+            });
 
-                $('#listNewFiles').html('')
-                names.forEach(function (name) {
-                    $('#listNewFiles').append('<br />' + name)
-                })
+            listNewFiles.append('<br />' +
+                '<button class="alert alert-danger" type="button" onclick="clearListUploads()">' +
+                '<i class="fa fa-trash"></i>' +
+                '</button>'
+            );
 
-                $('#listNewFiles').append('<br />' +
-                    '<button class="alert alert-danger" type="button" onclick="clearListUploads()">' +
-                    '<i class="fa fa-trash"></i>' +
-                    '</button>'
-                )
+            console.log('names', names,
+                'upload_files_files :', $(this).prop("files"),
+                '\n#upload_files_files.val()', upload_files_files.val()
+            );
 
-                console.log('names', names,
-                    'upload_files_files :', $(this).prop("files"),
-                    '\n#upload_files_files.val()', $('#upload_files_files').val()
-                )
+            listNewFiles.append('<p></p>')
 
-                $('#listNewFiles').append('<p></p>')
+        });
 
-            })
+        function clearListUploads() {
+            console.log('clearListUploads');
+            upload_files_files.val('');
+            listNewFiles.html('');
 
-
-            $('#upload_files_saveTo').change(function (event) {
-                const addClass = "fa-" + ($(this).val() != "database" ? "folder" : "database")
-                const removeClass = "fa-" + ($(this).val() != "folder" ? "folder" : "database")
-
-                console.log('new  class :', addClass)
-                $('#saveTo').children('i').removeClass(removeClass).addClass(addClass)
-
-                console.log('this.text :', $(this).val(),
-                    '\n## i.html', $('#saveTo').children('i')
-                )
-            })
-
-            function clearListUploads() {
-                console.log('clearListUploads')
-                $('#upload_files_files').val('')
-                $('#listNewFiles').html('')
-
-                if (!/safari/i.test(navigator.userAgent)) {
-                    $('#upload_files_files').attr('type', '')
-                    $('#upload_files_files').attr('type', 'file')
-                }
+            if (!/safari/i.test(navigator.userAgent)) {
+                upload_files_files.attr('type', '');
+                upload_files_files.attr('type', 'file');
             }
-        </script>
-    {% endblock %}
+        }
+    </script>
+{% endblock %}

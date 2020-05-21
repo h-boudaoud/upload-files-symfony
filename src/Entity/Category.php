@@ -115,11 +115,28 @@ class Category
     }
 
     /**
+     * Return just the products of the category, not of these subcategories
      * @return Collection|Product[]
      */
     public function getProducts(): Collection
     {
         return $this->products;
+    }
+
+    /**
+     * Return the products of the category and these subcategories
+     * @return Collection|Product[]
+     */
+    public function getProductsAllCategories(): Collection
+    {
+        $products =$this->products;
+        foreach ($this->subCategories as $subCategory) {
+            foreach ($subCategory->getProducts() as $product){
+                $products[] = $product;
+            }
+        }
+
+        return $products;
     }
 
     public function addProduct(Product $product): self
@@ -143,5 +160,8 @@ class Category
         }
 
         return $this;
+    }
+    public function     getLabelForm(){
+        return $this->subCategory->getName().' > '.$this->name;
     }
 }
