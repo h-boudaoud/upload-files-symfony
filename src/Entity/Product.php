@@ -320,6 +320,11 @@ class Product
     function addImage(Image $image): self
     {
         // dd(['addImage'=>$image]);
+
+        if (!in_array($image->getMimeType(), Image::MIME_TYPES)){
+            throw new \Exception("File saving failed. Allowed file extensions are :.jpg, .gif, .ico, .png, .svg, .pdf");
+        }
+
         if (!$this->images->contains($image)) {
             $image->saveTo();
             $this->images[] = $image;
@@ -327,7 +332,6 @@ class Product
             $image->setProduct($this);
             //dd(['addImage'=>$image]);
         }
-
         return $this;
     }
 

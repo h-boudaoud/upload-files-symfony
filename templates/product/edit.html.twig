@@ -107,9 +107,11 @@
                                 {{ form_widget(form.images.image) }}
                                 <br/><small>{{ form_help(form.images.image) }}</small>
                                 <div id="listNewFiles"></div>
-                                <div class="form-error">
+                                {% if form_errors(form.images.image)  %}
+                                <div class="form-error alert alert-danger" role="alert">
                                     {{ form_errors(form.images.image) }}
                                 </div>
+                                {% endif %}
 
                             </div>
                         </div>

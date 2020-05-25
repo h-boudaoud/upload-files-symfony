@@ -49,7 +49,7 @@ class Image
      * @ORM\Column(type="string", length=255)
      * @Assert\Choice(
      *     choices=Image::MIME_TYPES,
-     *     message="File saving failed. Allowed file extensions are :.jpg, .gif, .ico, .png, .svg, .pdf"
+     *     message="File saving failed. Allowed file extensions are :.jpg, .gif, .ico, .png, .svg"
      * )
      */
     private $mimeType;

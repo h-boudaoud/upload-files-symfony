@@ -10,6 +10,7 @@ use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -36,10 +37,10 @@ class ProductController extends AbstractController
 
         $form = $this->createForm(ProductType::class, $product);
 
-        try{
+        try {
             $form->handleRequest($request);
-        }catch (\Exception $e){
-            dd(['error'=>$e]);
+        } catch (\Exception $e) {
+            dd(['error' => $e]);
         }
 //        if ($form->isSubmitted()) {
 //            dd([
@@ -58,18 +59,17 @@ class ProductController extends AbstractController
 //            $files = $form->get('images')->getData();
 //            dump(['edit files'=>$files]);
 
-            $image= $form->get('images')->getData();
+            $image = $form->get('images')->getData();
 
 //            dd(['edit $image'=>$image->getImage()]);
-            if($image->getImage()) {
-                $product->addImage($image);
-            }
-
-            $manager->persist($product);
-            foreach ($product->getImages() as $image) {
-                $manager->persist($image);
-            }
-            $manager->flush();
+            if ($image->getImage()) {
+                try {
+                    $product->addImage($image);
+                    $manager->persist($product);
+                    foreach ($product->getImages() as $image) {
+                        $manager->persist($image);
+                    }
+                    $manager->flush();
 //            dd([
 //                'form' => $form->get('images')->getData(),
 //                'form Error' => $form->getErrors(),
@@ -77,7 +77,16 @@ class ProductController extends AbstractController
 //                'image' => $image
 //            ]);
 
-            return $this->redirectToRoute('product_by_id', ['id' => $product->getId(), 'name' => str_replace(' ', '-', $product->getName())], 301);
+                    return $this->redirectToRoute('product_by_id', ['id' => $product->getId(), 'name' => str_replace(' ', '-', $product->getName())], 301);
+
+                } catch (\Exception $e) {
+                    $form->addError(new FormError("Error Upload file"));
+
+                    $form->get('images')->get('image')->addError(new FormError($e->getMessage()));
+
+                }
+            }
+
 
         }
 
